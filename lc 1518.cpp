@@ -8,6 +8,7 @@
 // Explanation: You can exchange 4 empty bottles to get 1 full water bottle. 
 // Number of water bottles you can drink: 15 + 3 + 1 = 19.
 
+// Optimised
 class Solution {
 public:
     int numWaterBottles(int numBottles, int numExchange) {
@@ -21,5 +22,25 @@ public:
             empty=empty%numExchange;
         }
         return total;
+    }
+};
+
+//brute force
+class Solution {
+public:
+    int numWaterBottles(int numBottles, int numExchange) {
+        int consumedBottles = 0;
+
+        while (numBottles >= numExchange) {
+            // Consume numExchange full bottles.
+            consumedBottles += numExchange;
+            numBottles -= numExchange;
+
+            // Exchange them for one full bottle.
+            numBottles++;
+        }
+
+        // Consume the remaining numBottles (<numExchange).
+        return consumedBottles + numBottles;
     }
 };
